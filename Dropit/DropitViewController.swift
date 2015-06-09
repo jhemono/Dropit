@@ -34,6 +34,18 @@ class DropitViewController: UIViewController, UIDynamicAnimatorDelegate {
         }
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        let drops = animator.itemsInRect(gameView.bounds) as! [UIView]
+        animator.removeBehavior(dropitBehavior)
+        for drop in drops {
+            let tmp = drop.frame.origin.x
+            drop.frame.origin.x = drop.frame.origin.y
+            drop.frame.origin.y = tmp
+            animator.updateItemUsingCurrentState(drop)
+        }
+        animator.addBehavior(dropitBehavior)
+    }
+    
     lazy var animator: UIDynamicAnimator = {
         let lazilyCreatedDynamicAnimator = UIDynamicAnimator(referenceView: self.gameView)
         lazilyCreatedDynamicAnimator.delegate = self
