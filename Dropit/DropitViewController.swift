@@ -83,7 +83,7 @@ class DropitViewController: UIViewController, UIDynamicAnimatorDelegate {
         var dropsToRemove = [UIView]()
         var dropFrame = CGRect(x: 0, y: gameView.frame.maxY, width: dropSize.width, height: dropSize.height)
         
-        do {
+        repeat {
             dropFrame.origin.y -= dropSize.height
             dropFrame.origin.x = 0
             var dropsFound = [UIView]()
