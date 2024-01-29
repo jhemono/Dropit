@@ -16,7 +16,9 @@ class DropitViewController: UIViewController, UIDynamicAnimatorDelegate {
     
     var attachmentBehavior: UIAttachmentBehavior? {
         willSet {
-            animator.removeBehavior(attachmentBehavior)
+            if let attachment = attachmentBehavior {
+                animator.removeBehavior(attachment)
+            }
             gameView.setPath(nil, named: PathNames.Attachment)
         }
         didSet {
